@@ -14,7 +14,7 @@ typedef struct
 	char author[100];
 	int publication_year;
 	struct Book* next; //(pointer to the next book in the list)
-};
+}book;
 
 int main(void)
 {
