@@ -19,7 +19,7 @@ typedef struct
 int main(void)
 {
 
-
+	//words and stuff
 
 
 	return 0;
