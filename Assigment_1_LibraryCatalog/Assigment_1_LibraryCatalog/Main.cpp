@@ -7,22 +7,34 @@
 * The functions in this file are used to …
 */
 
-typedef struct 
+#include <stdio.h>
+
+typedef struct Book
 {
 	int id;
 	char title[100];
 	char author[100];
 	int publication_year;
 	struct Book* next; //(pointer to the next book in the list)
-}book;
+} Book;
+
+
+void viewBooks(Book*);
 
 int main(void)
 {
+	// Statically defining books
+	Book book1;
+	Book book2 = { 2, "Clean Code", "Robert C. Martin", 2008, NULL };
+	Book book3 = { 3, "Introduction to Algorithms", "Thomas H. Cormen", 1990, NULL };
 
-	//words and stuff
+	// Linking books to form a linked list
+	book1.next = &book2;
+	book2.next = &book3;
+	book3.next = NULL;  // Last book points to NULL
 
-
-	return 0;
+	viewBooks(&book1);
+	
 }
 
 //
@@ -35,19 +47,32 @@ int main(void)
 //
 void addBook(Book** head, int id, const char* title, const char* author, int publication_year)
 {
-	//	Adds a new book to the end of the linked list.
+	// asidknfoasdfl
 }
 
 //
-// FUNCTION :
+// FUNCTION : viewBooks
 // DESCRIPTION :
-// 
+// Iterates through a linked list of Book structs and prints their data.
 // PARAMETERS :
-//
+// Book* head: Pointer to head element of the linked list
 // RETURNS :
-//
+// void
 void viewBooks(Book* head)
 {
+	// Check if linked list is empty
+	if (head == NULL) {
+		printf("Error: List is empty.");
+		return;
+	}
+
+	//Iterate until next ptr is null
+	Book* current = head;
+	while (current != NULL) {
+		printf("Book ID: %d\nBook Title: %s\nAuthor: %s\nPublication Year: %d\n\n", current->id, current->title, current->author, current->publication_year);
+		current = current->next;
+	}
+	printf("End of data.");
 	//	Traverses the linked list and prints details of all books.
 }
 
