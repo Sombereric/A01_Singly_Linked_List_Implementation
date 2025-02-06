@@ -65,6 +65,7 @@ void viewBooks(Book* head)
 	printf("End of data.");
 }
 
+
 //
 // FUNCTION :
 // DESCRIPTION :
@@ -120,13 +121,14 @@ void searchBooks(Book* head, const char* title)
 		}
 		else {
 			// If a valid pointer is returned from strstr, print the current books title and iterate to next book
-			printf("\nMatch found for %s in book %s\n", title, current->title);
+			printf("\nMatch found for '%s' in book '%s'\n", title, current->title);
 			current = current->next;
 		}
 	}
 	return;
 	//	Searches for books containing the specified Title or partial Title.
 }
+
 //	Important Note
 //	3. Ensure proper memory management with functions to free memory when books are deleted or the
 //	program exits.
