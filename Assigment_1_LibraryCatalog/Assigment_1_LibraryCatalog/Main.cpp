@@ -8,7 +8,7 @@
 * PROGRAMMER : Eric Moutoux, Nick Porter, Hunter Wakely, ...
 * FIRST VERSION : 2025-01-28
 * DESCRIPTION :
-* The functions in this file are used to …
+* The functions in this file are used to â€¦
 */
 
 
@@ -340,6 +340,7 @@ void searchBooks(Book* head, const char* title)
 	return;
 	//	Searches for books containing the specified Title or partial Title.
 }
+
 //	Important Note
 //	3. Ensure proper memory management with functions to free memory when books are deleted or the
 //	program exits.
@@ -485,10 +486,6 @@ int getUserBookPublicationYear()
 			bookYearSelector = false;
 		}
 	}
-<<<<<<< HEAD
 	return bookPublicationYear;
 }
-=======
-	return = bookPublicationYear;
-}
->>>>>>> Development_Branch
+
