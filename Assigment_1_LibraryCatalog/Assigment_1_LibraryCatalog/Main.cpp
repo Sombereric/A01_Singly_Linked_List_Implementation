@@ -8,6 +8,7 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 
 typedef struct Book
 {
@@ -20,11 +21,12 @@ typedef struct Book
 
 
 void viewBooks(Book*);
+void searchBooks(Book*, const char*);
 
 int main(void)
 {
 	// Statically defining books
-	Book book1;
+	Book book1 = { 1, "asdf", "fuckface", 5000, NULL };
 	Book book2 = { 2, "Clean Code", "Robert C. Martin", 2008, NULL };
 	Book book3 = { 3, "Introduction to Algorithms", "Thomas H. Cormen", 1990, NULL };
 
@@ -34,7 +36,11 @@ int main(void)
 	book3.next = NULL;  // Last book points to NULL
 
 	viewBooks(&book1);
-	
+
+	char hi[] = "o";
+	searchBooks(&book1, hi);
+
+
 }
 
 //
@@ -66,14 +72,13 @@ void viewBooks(Book* head)
 		return;
 	}
 
-	//Iterate until next ptr is null
+	//Iterate until the current books next ptr is null
 	Book* current = head;
 	while (current != NULL) {
 		printf("Book ID: %d\nBook Title: %s\nAuthor: %s\nPublication Year: %d\n\n", current->id, current->title, current->author, current->publication_year);
 		current = current->next;
 	}
 	printf("End of data.");
-	//	Traverses the linked list and prints details of all books.
 }
 
 //
@@ -112,6 +117,29 @@ void deleteBook(Book** head, int id)
 //
 void searchBooks(Book* head, const char* title)
 {
+	// Check if linked list is empty
+	if (head == NULL) {
+		printf("Error: List is empty.");
+		return;
+	}
+
+	//Set current to the head element
+	Book* current = head;
+
+	//Iterate until current->next is null
+	while (current != NULL) {
+
+		//Checks if the inputted string is in the current title, if not, strstr returns a null pointer, so iterate to next book
+		if (strstr(current->title, title) == NULL) {
+			current = current->next;
+		}
+		else {
+			// If a valid pointer is returned from strstr, print the current books title and iterate to next book
+			printf("\nMatch found for %s in book %s\n", title, current->title);
+			current = current->next;
+		}
+	}
+	return;
 	//	Searches for books containing the specified Title or partial Title.
 }
 //	Important Note
