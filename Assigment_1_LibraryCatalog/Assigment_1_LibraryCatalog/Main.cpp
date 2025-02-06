@@ -287,6 +287,7 @@ int getUserBookId()
 			bookIDSelector = false;
 		}
 	}
+	return bookId;
 }
 char getUserBookTitle()
 {
@@ -377,5 +378,10 @@ int getUserBookPublicationYear()
 			bookYearSelector = false;
 		}
 	}
+<<<<<<< HEAD
+	return bookPublicationYear;
+}
+=======
 	return = bookPublicationYear;
 }
+>>>>>>> Development_Branch
