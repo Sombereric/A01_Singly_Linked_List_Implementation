@@ -29,10 +29,10 @@ void deleteBook(Book** head, int id);
 
 //protoypes/input/output functions
 int getUserNumber();
-void getUserBookId();
-void getUserBookTitle();
-void getUserbookAuthor();
-void getUserBookPublicationYear();
+int getUserBookId();
+char getUserBookTitle();
+char getUserbookAuthor();
+int getUserBookPublicationYear();
 
 void displayMenu();
 
@@ -65,7 +65,7 @@ int main(void)
 				yesNoChecker = getUserNumber();
 				if (yesNoChecker == 1)
 				{
-					int bookId = getUserBookId;
+					int bookId = getUserBookId();
 					char bookTitle[50] = getUserBookTitle();
 					char bookAuthor[50] = getUserbookAuthor();
 					int bookPublicationYear = getUserBookPublicationYear();
@@ -288,7 +288,7 @@ int getUserBookId()
 		}
 	}
 }
-void getUserBookTitle()
+char getUserBookTitle()
 {
 	char bookTitle[50] = "";
 	bool titleSelector = true;
@@ -318,8 +318,9 @@ void getUserBookTitle()
 			titleSelector = false;
 		}
 	}
+	return bookTitle;
 }
-void getUserbookAuthor()
+char getUserbookAuthor()
 {
 	char bookAuthor[50] = "";
 	printf("Please enter the books author: ");
@@ -349,10 +350,10 @@ void getUserbookAuthor()
 			authorSelector = false;
 		}
 	}
+	return bookAuthor;
 }
-void getUserBookPublicationYear()
+int getUserBookPublicationYear()
 {
-	int bookPublicationYear = 0;
 	bool bookYearSelector = true;
 	int bookPublicationYear = 0;
 	printf("Please enter a valid book Id: ");
@@ -376,4 +377,5 @@ void getUserBookPublicationYear()
 			bookYearSelector = false;
 		}
 	}
+	return = bookPublicationYear;
 }
