@@ -5,7 +5,7 @@
 /*
 * FILE : mySourceFile.c
 * PROJECT : PROG1345 - Assignment #1
-* PROGRAMMER : Eric Moutoux, ...
+* PROGRAMMER : Eric Moutoux, Nick Porter, ...
 * FIRST VERSION : 2025-01-28
 * DESCRIPTION :
 * The functions in this file are used to …
@@ -361,6 +361,7 @@ int getUserBookId()
 			bookIDSelector = false;
 		}
 	}
+	return bookId;
 }
 char getUserBookTitle()
 {
@@ -451,5 +452,10 @@ int getUserBookPublicationYear()
 			bookYearSelector = false;
 		}
 	}
+<<<<<<< HEAD
+	return bookPublicationYear;
+}
+=======
 	return = bookPublicationYear;
 }
+>>>>>>> Development_Branch
