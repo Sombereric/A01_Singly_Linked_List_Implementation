@@ -20,25 +20,9 @@ typedef struct Book
 } Book;
 
 
-void viewBooks(Book*);
-void searchBooks(Book*, const char*);
 
 int main(void)
 {
-	// Statically defining books
-	Book book1 = { 1, "asdf", "fuckface", 5000, NULL };
-	Book book2 = { 2, "Clean Code", "Robert C. Martin", 2008, NULL };
-	Book book3 = { 3, "Introduction to Algorithms", "Thomas H. Cormen", 1990, NULL };
-
-	// Linking books to form a linked list
-	book1.next = &book2;
-	book2.next = &book3;
-	book3.next = NULL;  // Last book points to NULL
-
-	viewBooks(&book1);
-
-	char hi[] = "o";
-	searchBooks(&book1, hi);
 
 
 }
@@ -108,13 +92,14 @@ void deleteBook(Book** head, int id)
 }
 
 //
-// FUNCTION :
+// FUNCTION : searchBooks
 // DESCRIPTION :
-// 
+// Searches for books with partial/full matches of an inputted string, and prints them to the screen
 // PARAMETERS :
-//
+// Book* head: Pointer to head element of the list
+// const char* title: Pointer to inputted string
 // RETURNS :
-//
+// void
 void searchBooks(Book* head, const char* title)
 {
 	// Check if linked list is empty
@@ -129,7 +114,7 @@ void searchBooks(Book* head, const char* title)
 	//Iterate until current->next is null
 	while (current != NULL) {
 
-		//Checks if the inputted string is in the current title, if not, strstr returns a null pointer, so iterate to next book
+		//Checks if the inputted string is in the current title. If not, strstr returns a null pointer, so iterate to next book
 		if (strstr(current->title, title) == NULL) {
 			current = current->next;
 		}
