@@ -156,6 +156,7 @@ void displayMenu()
 void addBook(Book** head, int id, const char* title, const char* author, int publication_year)
 {
 	//	Adds a new book to the end of the linked list.
+	//this function sucks dudue
 }
 
 //
