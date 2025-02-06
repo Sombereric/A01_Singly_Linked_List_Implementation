@@ -5,7 +5,7 @@
 /*
 * FILE : mySourceFile.c
 * PROJECT : PROG1345 - Assignment #1
-* PROGRAMMER : Eric Moutoux, ...
+* PROGRAMMER : Eric Moutoux, Nick Porter, ...
 * FIRST VERSION : 2025-01-28
 * DESCRIPTION :
 * The functions in this file are used to …
@@ -155,10 +155,83 @@ void displayMenu()
 //
 void addBook(Book** head, int id, const char* title, const char* author, int publication_year)
 {
-	//	Adds a new book to the end of the linked list.
-	//this function sucks dudue
+	//Memory Allocation for newBook
+	Book* newBook = (Book*)malloc(sizeof(Book));
+	//Error message displayed if memory allocation failed
+	if (newBook == NULL)
+	{
+		printf("Memory Allocation Failed.\n");
+		return;
+	}
+	//Prompt to get all the book details
+	printf("Enter the book details: \n");
+	//Book ID
+	printf("Enter Book ID:");
+	scanf("%d", &id);
+	//Remove newline character
+	getchar();
+	//Check if the ID given by user is already taken
+	if (isUniqueID(*head, id) == NULL)
+	{
+		printf("Error: Duplicate ID entered! Book not added.\n");
+		free(newBook);
+		return;
+	}
+	//Book Title
+	printf("Enter Book Title: ");
+	fgets(newBook->title, MAX_TITLE_LENGTH, stdin);
+	newBook->title[strcspn(newBook->title, "\n")] = '\0';
+	//Book Author
+	printf("Enter Book Author: ");
+	fgets(newBook->author, MAX_AUTHOR_LENGTH, stdin);
+	newBook->author[strcspn(newBook->author, "\n")] = '\0';
+	//Book Publication Year
+	printf("Enter Publication Year: ");
+	scanf("%d", &newBook->publication_year);
+
+	//If the list is empty, new book becomes the head
+	if (*head == NULL)
+	{
+		*head = newBook;
+	}
+	else
+	{
+		//Iterate through list to find the end of the list and add newBook
+		Book* current = *head;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = newBook;
+	}
+	printf("Book added successfully!\n");
 }
 
+//
+// FUNCTION :
+// DESCRIPTION :
+// 
+// PARAMETERS :
+//
+// RETURNS :
+//
+int isUniqueID(Book* head, int id)
+{
+	Book* current = head;
+	//Check through the list to see if there is a repeat ID
+	while (current != NULL)
+	{
+		//if the ID is a duplicate, display error message
+		if (current->id == id)
+		{
+			printf("ID is not unique.");
+			return 0;
+		}
+		current = current->next;
+	}
+	//No duplicate ID
+	return 1;
+}
 //
 // FUNCTION :
 // DESCRIPTION :
