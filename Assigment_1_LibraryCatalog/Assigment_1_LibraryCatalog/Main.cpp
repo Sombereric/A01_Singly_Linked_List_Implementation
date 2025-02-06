@@ -3,13 +3,14 @@
 #include <string.h>
 
 /*
-* FILE : mySourceFile.c
-* PROJECT : PROG1345 - Assignment #1
-* PROGRAMMER : Eric Moutoux, Nick Porter, ...
+* FILE : LibraryCatalog.c
+* PROJECT : SENG1050 - A01_Singly_Linked_List_Implementation
+* PROGRAMMER : Eric Moutoux, Nick Porter, Hunter Wakely, ...
 * FIRST VERSION : 2025-01-28
 * DESCRIPTION :
-* The functions in this file are used to …
+* The functions in this file are used to â€¦
 */
+
 
 typedef struct Book
 {
@@ -148,13 +149,17 @@ void displayMenu()
 }
 
 //
-// FUNCTION :
+// FUNCTION : addBook
 // DESCRIPTION :
-// 
+// adds a new book to the end of the list 
 // PARAMETERS :
-//
+// Book** head : Pointer to a pointer to the head of the list
+// int id: the book ID
+// const char* title : pointer to the title of the book
+// const char* author : pointer to the author of the book
+// int publication_year : the publication year of the book
 // RETURNS :
-//
+// Has no return parameters
 void addBook(Book** head, int id, const char* title, const char* author, int publication_year)
 {
 	char buffer[50];
@@ -166,35 +171,20 @@ void addBook(Book** head, int id, const char* title, const char* author, int pub
 		printf("Memory Allocation Failed.\n");
 		return;
 	}
-	////Prompt to get all the book details
-	//printf("Enter the book details: \n");
-	////Book ID
-	//printf("Enter Book ID:");
-	//if (sscanf_s(buffer, "%d", &id) < 0)
-	//{
-	//	//sets the number to an error
-	//	userInput = -1;
-	//}
-	////Remove newline character
-	//getchar();
-	////Check if the ID given by user is already taken
-	//if (isUniqueID(*head, id) == NULL)
-	//{
-	//	printf("Error: Duplicate ID entered! Book not added.\n");
-	//	free(newBook);
-	//	return;
-	//}
-	////Book Title
-	//printf("Enter Book Title: ");
-	//fgets(newBook->title, MAX_TITLE_LENGTH, stdin);
-	//newBook->title[strcspn(newBook->title, "\n")] = '\0';
-	////Book Author
-	//printf("Enter Book Author: ");
-	//fgets(newBook->author, MAX_AUTHOR_LENGTH, stdin);
-	//newBook->author[strcspn(newBook->author, "\n")] = '\0';
-	////Book Publication Year
-	//printf("Enter Publication Year: ");
-	//scanf("%d", &newBook->publication_year);
+	//Prompt to get all the book details
+	printf("Enter the book details: \n");
+	//Book ID
+	printf("Enter Book ID:");
+	scanf("%d", &id);
+	//Remove newline character
+	getchar();
+	//Check if the ID given by user is already taken
+	if (isUniqueID(*head, id) == NULL)
+	{
+		printf("Error: Duplicate ID entered! Book not added.\n");
+		free(newBook);
+		return;
+	}
 
 	//If the list is empty, new book becomes the head
 	if (*head == NULL)
@@ -217,11 +207,12 @@ void addBook(Book** head, int id, const char* title, const char* author, int pub
 //
 // FUNCTION : viewBooks
 // DESCRIPTION :
-// Iterates through a linked list of Book structs and prints their data.
+// Checks if the book ID is used
 // PARAMETERS :
 // Book* head: Pointer to head element of the linked list
+// int id : the ID of the book
 // RETURNS :
-//
+// int : Returns a 1 if no duplicate ID, 0 if duplicate ID
 int isUniqueID(Book* head, int id)
 {
 	Book* current = head;
@@ -241,11 +232,11 @@ int isUniqueID(Book* head, int id)
 }
 
 //
-// FUNCTION :
+// FUNCTION : viewBooks
 // DESCRIPTION :
-// 
+// Iterates through a linked list of Book structs and prints their data.
 // PARAMETERS :
-//
+// Book* head: Pointer to head element of the linked list
 // RETURNS :
 //
 void viewBooks(Book* head)
@@ -267,13 +258,14 @@ void viewBooks(Book* head)
 
 
 //
-// FUNCTION :
+// FUNCTION : updateBook
 // DESCRIPTION :
-// 
+// Updates the book
 // PARAMETERS :
-//
+// Book* head : Pointer to the head of the list 
+// int id : the ID of the book
 // RETURNS :
-//
+// has no return parameters
 void updateBook(Book* head, int id)
 {
 	Book* iterator = head;
@@ -304,7 +296,7 @@ void updateBook(Book* head, int id)
 }
 
 //
-// FUNCTION :
+// FUNCTION : deleteBook
 // DESCRIPTION :
 // 
 // PARAMETERS :
