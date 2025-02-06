@@ -30,10 +30,10 @@ void deleteBook(Book** head, int id);
 //protoypes/input/output functions
 int getUserNumber();
 int getUserBookId();
-char getUserBookTitle();
-char getUserbookAuthor();
+void getUserBookTitle(char bookTitle[]);
+void getUserbookAuthor(char bookAuthor[]);
 int getUserBookPublicationYear();
-
+int isUniqueID(Book* head, int id);
 void displayMenu();
 
 typedef enum {
@@ -50,6 +50,8 @@ int main(void)
 	Book* head = NULL;
 	int userPickedId = 0;
 	int yesNoChecker = 0;
+	char bookTitle[50] = "";
+	char bookAuthor[50] = "";
 	//words and stuff
 	char bookSearchTitle[50] = "";
 	bool runTimer = true;
@@ -66,8 +68,8 @@ int main(void)
 				if (yesNoChecker == 1)
 				{
 					int bookId = getUserBookId();
-					char bookTitle[50] = getUserBookTitle();
-					char bookAuthor[50] = getUserbookAuthor();
+					getUserBookTitle(bookTitle);
+					getUserbookAuthor(bookAuthor);
 					int bookPublicationYear = getUserBookPublicationYear();
 					//check if id is already in use NICK!
 					//calls the addbook function.
@@ -111,7 +113,7 @@ int main(void)
 				}
 				break;
 			case SearchForABook:
-				char bookTitle[50] = getUserBookTitle();
+				getUserBookTitle(bookTitle);
 				searchBooks(head, bookTitle);
 				break;
 			case ExitProgram:
@@ -155,6 +157,7 @@ void displayMenu()
 //
 void addBook(Book** head, int id, const char* title, const char* author, int publication_year)
 {
+	char buffer[50];
 	//Memory Allocation for newBook
 	Book* newBook = (Book*)malloc(sizeof(Book));
 	//Error message displayed if memory allocation failed
@@ -163,31 +166,35 @@ void addBook(Book** head, int id, const char* title, const char* author, int pub
 		printf("Memory Allocation Failed.\n");
 		return;
 	}
-	//Prompt to get all the book details
-	printf("Enter the book details: \n");
-	//Book ID
-	printf("Enter Book ID:");
-	scanf("%d", &id);
-	//Remove newline character
-	getchar();
-	//Check if the ID given by user is already taken
-	if (isUniqueID(*head, id) == NULL)
-	{
-		printf("Error: Duplicate ID entered! Book not added.\n");
-		free(newBook);
-		return;
-	}
-	//Book Title
-	printf("Enter Book Title: ");
-	fgets(newBook->title, MAX_TITLE_LENGTH, stdin);
-	newBook->title[strcspn(newBook->title, "\n")] = '\0';
-	//Book Author
-	printf("Enter Book Author: ");
-	fgets(newBook->author, MAX_AUTHOR_LENGTH, stdin);
-	newBook->author[strcspn(newBook->author, "\n")] = '\0';
-	//Book Publication Year
-	printf("Enter Publication Year: ");
-	scanf("%d", &newBook->publication_year);
+	////Prompt to get all the book details
+	//printf("Enter the book details: \n");
+	////Book ID
+	//printf("Enter Book ID:");
+	//if (sscanf_s(buffer, "%d", &id) < 0)
+	//{
+	//	//sets the number to an error
+	//	userInput = -1;
+	//}
+	////Remove newline character
+	//getchar();
+	////Check if the ID given by user is already taken
+	//if (isUniqueID(*head, id) == NULL)
+	//{
+	//	printf("Error: Duplicate ID entered! Book not added.\n");
+	//	free(newBook);
+	//	return;
+	//}
+	////Book Title
+	//printf("Enter Book Title: ");
+	//fgets(newBook->title, MAX_TITLE_LENGTH, stdin);
+	//newBook->title[strcspn(newBook->title, "\n")] = '\0';
+	////Book Author
+	//printf("Enter Book Author: ");
+	//fgets(newBook->author, MAX_AUTHOR_LENGTH, stdin);
+	//newBook->author[strcspn(newBook->author, "\n")] = '\0';
+	////Book Publication Year
+	//printf("Enter Publication Year: ");
+	//scanf("%d", &newBook->publication_year);
 
 	//If the list is empty, new book becomes the head
 	if (*head == NULL)
@@ -232,6 +239,7 @@ int isUniqueID(Book* head, int id)
 	//No duplicate ID
 	return 1;
 }
+
 //
 // FUNCTION :
 // DESCRIPTION :
@@ -273,7 +281,7 @@ void updateBook(Book* head, int id)
 	{
 		printf("The Book id matched too %s, is this correct? 1. Yes \n 2. No \n", iterator->title);
 		int matchCheckertitle = 0;
-		char newbooktitle[50] = 0;
+		char newbooktitle[50] = "";
 		matchCheckertitle = getUserNumber();
 		if (matchCheckertitle < 0 || matchCheckertitle > 2)
 		{
@@ -377,22 +385,33 @@ int getUserNumber()
 int getUserBookId()
 {
 	bool bookIDSelector = true;
+	bool validBookIdChecker = true;
 	int bookId = 0;
-	printf("Please enter a valid book Id: ");
+
 	while (bookIDSelector)
 	{
-		//where user input is obtained
-		bookId = getUserNumber();
-		printf("Is %d the correct Id? \n1. Yes\n2. No\n", bookId);
 		int bookIDUserChecker = 0;
-		bookIDUserChecker = getUserNumber();
-		if (bookIDUserChecker < 0 || bookIDUserChecker > 2)
+		while (validBookIdChecker)
 		{
-			printf("\nInvalid book id.");
+			printf("Please enter a valid book Id: ");
+			//where user input is obtained
+			bookId = getUserNumber();
+			if (bookId < 0)
+			{
+				printf("\nInvalid book id.\n");
+			}
+			else 
+			{
+				validBookIdChecker = false;
+			}
 		}
-		else if (bookIDUserChecker == 2)
+
+		printf("Is %d the correct Id? \n1. Yes\n2. No\n", bookId);
+
+		bookIDUserChecker = getUserNumber();
+		if (bookIDUserChecker == 2)
 		{
-			printf("Please reinput Id: ");
+			validBookIdChecker = true;
 		}
 		else
 		{
@@ -401,9 +420,8 @@ int getUserBookId()
 	}
 	return bookId;
 }
-char getUserBookTitle()
+void getUserBookTitle(char bookTitle[])
 {
-	char bookTitle[50] = "";
 	bool titleSelector = true;
 	printf("Please enter a valid book title: ");
 	while (titleSelector)
@@ -411,7 +429,7 @@ char getUserBookTitle()
 		//where user input is obtained
 		fgets(bookTitle, sizeof(bookTitle), stdin);
 		int len = strlen(bookTitle);
-		if (len > 0 && bookTitle[len - 1] == '\n')
+		if (len > 0 && bookTitle[len -1] == '\n')
 		{
 			bookTitle[len - 1] = '\0';
 		}
@@ -431,11 +449,10 @@ char getUserBookTitle()
 			titleSelector = false;
 		}
 	}
-	return bookTitle;
+	return;
 }
-char getUserbookAuthor()
+void getUserbookAuthor(char bookAuthor[])
 {
-	char bookAuthor[50] = "";
 	printf("Please enter the books author: ");
 	bool authorSelector = true;
 	while (authorSelector)
@@ -463,7 +480,7 @@ char getUserbookAuthor()
 			authorSelector = false;
 		}
 	}
-	return bookAuthor;
+	return;
 }
 int getUserBookPublicationYear()
 {
@@ -490,10 +507,5 @@ int getUserBookPublicationYear()
 			bookYearSelector = false;
 		}
 	}
-<<<<<<< HEAD
 	return bookPublicationYear;
 }
-=======
-	return = bookPublicationYear;
-}
->>>>>>> Development_Branch
