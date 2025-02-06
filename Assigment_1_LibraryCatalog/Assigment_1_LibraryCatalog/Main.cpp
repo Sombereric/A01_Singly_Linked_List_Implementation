@@ -65,7 +65,7 @@ int main(void)
 				yesNoChecker = getUserNumber();
 				if (yesNoChecker == 1)
 				{
-					int bookId = getUserBookId;
+					int bookId = getUserBookId();
 					char bookTitle[50] = getUserBookTitle();
 					char bookAuthor[50] = getUserbookAuthor();
 					int bookPublicationYear = getUserBookPublicationYear();
@@ -378,5 +378,10 @@ int getUserBookPublicationYear()
 			bookYearSelector = false;
 		}
 	}
+<<<<<<< HEAD
 	return bookPublicationYear;
 }
+=======
+	return = bookPublicationYear;
+}
+>>>>>>> Development_Branch
