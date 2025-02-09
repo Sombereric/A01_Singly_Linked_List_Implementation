@@ -4,8 +4,12 @@
 * PROGRAMMER : Joe Student
 * FIRST VERSION : 2025-01-28
 * DESCRIPTION :
-* The functions in this file are used to …
+* The functions in this file are used to â€¦
 */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct 
 {
