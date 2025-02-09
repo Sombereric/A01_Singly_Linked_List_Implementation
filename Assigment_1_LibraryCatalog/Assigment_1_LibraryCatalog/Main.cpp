@@ -171,20 +171,24 @@ void addBook(Book** head, int id, const char* title, const char* author, int pub
 		printf("Memory Allocation Failed.\n");
 		return;
 	}
-	//Prompt to get all the book details
-	printf("Enter the book details: \n");
-	//Book ID
-	printf("Enter Book ID:");
-	scanf("%d", &id);
-	//Remove newline character
-	getchar();
-	//Check if the ID given by user is already taken
+	//check if the book ID is unique
 	if (isUniqueID(*head, id) == NULL)
 	{
 		printf("Error: Duplicate ID entered! Book not added.\n");
 		free(newBook);
 		return;
 	}
+	
+	//copy the title's name to newBook
+	strcpy_s(newBook->title, title);
+	//copy the author's name to newBook
+	strcpy_s(newBook->author, author);
+	
+
+	//set book ID and publication year
+	newBook->id = id;
+	newBook->publication_year = publication_year;
+	newBook->next = NULL;
 
 	//If the list is empty, new book becomes the head
 	if (*head == NULL)
@@ -201,7 +205,6 @@ void addBook(Book** head, int id, const char* title, const char* author, int pub
 		}
 		current->next = newBook;
 	}
-	printf("Book added successfully!\n");
 }
 
 //
