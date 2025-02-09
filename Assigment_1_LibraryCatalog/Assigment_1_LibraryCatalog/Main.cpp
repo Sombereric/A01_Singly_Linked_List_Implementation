@@ -5,7 +5,7 @@
 /*
 * FILE : LibraryCatalog.c
 * PROJECT : SENG1050 - A01_Singly_Linked_List_Implementation
-* PROGRAMMER : Eric Moutoux, Nick Porter, Hunter Wakely, ...
+* PROGRAMMER : Eric Moutoux, Nick Porter, Hunter Wakely, Toro-Abasi Udo
 * FIRST VERSION : 2025-01-28
 * DESCRIPTION :
 * The functions in this file are used to …
