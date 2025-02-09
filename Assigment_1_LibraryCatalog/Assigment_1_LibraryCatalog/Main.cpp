@@ -13,14 +13,20 @@ typedef struct
 	char title[100];
 	char author[100];
 	int publication_year;
-	struct Book* next; //(pointer to the next book in the list)
-}book;
+	struct Book* next; // (pointer to the next book in the list)
+}Book;
+
+// Function prototypes
+void deleteBook(Book** head, int id);
 
 int main(void)
 {
-
-	//words and stuff
-
+    // To be inserted on the the call to delete book ID
+    char bookID[20]; // Buffer to hold book ID inputted by the user
+    printf("Enter book ID to delete: "); // Prompt the user to enter the book ID
+    fgets(bookID, sizeof(bookID), stdin);
+    int id = atoi(bookID);
+    deleteBook(&head, id);
 
 	return 0;
 }
@@ -65,16 +71,49 @@ void updateBook(Book* head, int id)
 }
 
 //
-// FUNCTION :
+// FUNCTION : deleteBook()
 // DESCRIPTION :
-// 
+//      Deletes a book from the catalog after the book ID has been inputted by the user
 // PARAMETERS :
-//
+//      Book** head, int id
 // RETURNS :
-//
+//      void
 void deleteBook(Book** head, int id)
 {
-	// Removes a book by ID from the linked list and frees the memory.
+    Book* catalog = *head;
+    Book* prevElem = NULL; // Pointer to keep track of the element before the one being deleted
+
+    if (*head == NULL) {
+        printf("No books found in the catalog.\n"); // Feedback on empty catalog list
+        return; // Stops execution if no books exist
+    }
+
+
+
+    // Update head after deletion if the book to delete is the first in the catalog
+    if (catalog != NULL && catalog->id == id) {
+        *head = catalog->next; // Change head to next element after deletion
+        free(catalog); // Free the memory of the deleted element after deletion
+        printf("Book with ID %d deleted successfully.\n", id);
+        return; // Stops execution since deletion is done
+    }
+
+    // Update head after deletion if the code  to delete is somewhere in the middle or end
+    while (catalog != NULL && catalog->id != id) {
+        prevElem = catalog; // Update previous element
+        catalog = catalog->next; // Move catalog list forward by one step after deletion
+    }
+
+    // If the book was not found
+    if (catalog == NULL) {
+        printf("Book ID not found.\n");
+        return; // Stops execution since no book was deleted
+    }
+
+    // Unlink the node from the list
+    prevElem->next = catalog->next;
+    free(catalog);
+    printf("Book with ID %d deleted successfully.\n", id);
 }
 
 //
