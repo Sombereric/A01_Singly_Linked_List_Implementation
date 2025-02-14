@@ -217,6 +217,17 @@ void addBook(Book** head, int id, const char* title, const char* author, int pub
 	newBook->publication_year = publication_year;
 	newBook->next = NULL;
 
+	//copy the title's name to newBook
+	strcpy_s(newBook->title, title);
+	//copy the author's name to newBook
+	strcpy_s(newBook->author, author);
+
+
+	//set book ID and publication year
+	newBook->id = id;
+	newBook->publication_year = publication_year;
+	newBook->next = NULL;
+
 	//If the list is empty, new book becomes the head
 	if (*head == NULL)
 	{
@@ -576,7 +587,7 @@ int getUserBookPublicationYear()
 {
 	int bookPublicationYear = 0;
 
-	printf("Please enter a valid book Id: ");
+	printf("Please enter a valid book publication year: ");
 
 	bool bookYearSelector = true;
 	while (bookYearSelector)
@@ -584,17 +595,17 @@ int getUserBookPublicationYear()
 		//where user input is obtained
 		bookPublicationYear = getUserNumber();
 		//input validation
-		printf("Is %d the correct Id? \n1. Yes\n2. No\n", bookPublicationYear);
+		printf("Is %d the correct publication year? \n1. Yes\n2. No\n", bookPublicationYear);
 		//used to determine if the user input the desired data
 		int bookYearUserChecker = 0;
 		bookYearUserChecker = getUserNumber();
 		if (bookYearUserChecker < 0 || bookYearUserChecker > 2)
 		{
-			printf("\nInvalid book id.");
+			printf("\nInvalid book publication year.");
 		}
 		else if (bookYearUserChecker == 2)
 		{
-			printf("Please reinput Id: ");
+			printf("Please reinput publication year: ");
 		}
 		else
 		{
